@@ -10,6 +10,8 @@ from colorama import init
 init(strip=not sys.stdout.isatty()) # strip colors if stdout is redirected
 from termcolor import cprint 
 from pyfiglet import figlet_format
+import os
+os.system("")
 
 
 # Return a single random word
@@ -308,7 +310,7 @@ while True:
         temp.append(Player(input(f"Enter "+ text_fucker.bold +f"Player {index+1}'s" +text_fucker.end +" name "+ text_fucker.italics + "(Default player name will be given upon no answer)" + text_fucker.end+": ")))
     #testers
     print()
-    print(text_fucker.bold + f"{Player.get_count()} "+text_fucker.end+"Players in Lobby: ")
+    print(text_fucker.bold + f"{Player.get_count()} "+text_fucker.end+"Player(s) in Lobby: ")
     print("--"*50)
     random.shuffle(text_fucker.color_list)
     for index, i in enumerate(temp):
@@ -332,8 +334,8 @@ while True:
                 else: break
             
         elif word_opt in ('y','Y'): 
-            word_list = requests.get('https://www.mit.edu/~ecprice/wordlist.10000',
-            timeout=10).content.decode('utf-8').splitlines()
+            word_list = requests.get('https://www.mit.edu/~ecprice/wordlist.10000'
+            ).content.decode('utf-8').splitlines()
             chosen_word = random.choice(word_list)
             #print("word::   ", chosen_word)
             break
