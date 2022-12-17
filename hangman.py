@@ -72,36 +72,33 @@ class Game_runner:
        "                |                    |\n"+\
        "                |                    |\n"+\
        "                |                    |\n"+\
-       "                |                    |\n"+\
-       "                                     |\n"+\
-       "                                     |\n"+\
-       "                                     |\n"+\
-       "                                     |\n"+\
-       "                                     |\n"+\
-       "                                     |\n"+\
-       "                                     |\n"+\
-       "                                     |\n"+\
-       "                                     |\n"+\
-       "                                     |\n"+\
-        "                                     |\n"+\
-        "                                     |\n"+\
-        "                                     |\n"
+       "                |                    |"
+    gallow2=["                                     |",
+       "                                     |",
+       "                                     |",
+       "                                     |",
+       "                                     |",
+       "                                     |",
+       "                                     |",
+       "                                     |",
+       "                                     |",
+       "                                     |"]
 #in order ot fix the formatting issue, i think i shoudl format the hangman node strings  into the gallow strings
 #this prolly means that before even printing the gallow i would need to check the hang man nodes first and if
 #there are any to print, format it into the gallow string and then only aafter the checks are done do we print them
 #monolothically, if there are no nodes in a particular string inthe gallows then they should be empty spaces
     hangman_nodes= {
-    .1:"         ( ͡° ͜ʖ ͡°)",
-    .2:"            /|\\",
-    .3:"           / | \\",
-    .4:"          /  |  \\",
-    .5:"         m   8=D  m  ",
-    .6:"           /     \ ",
-    .7:"      |===|      |===|\n",
-    .8:"      |   |      |   |\n",
-    .9:"      /  &|      |&  \\\n",
-    1:"   .-'`  , )*   *( ,  `'-.\n",
-    1:'  ` """""`"`      `"`"""""`\n'
+    .1:"             ( ͡° ͜ʖ ͡°)                |",
+    .2:"               /|\\                   |",
+    .3:"              / | \\                  |",
+    .4:"             /  |  \\                 |",
+    .5:"            m   8=D  m               |",
+    .6:"              /     \                |",
+    .7:"          |===|      |===|           |",
+    .8:"          |   |      |   |           |",
+    .9:"          /  &|      |&  \\           |",
+    1:"       .-'`  , )*   *( ,  `'-.       |\n"+\
+    '      ` """""`"`      `"`"""""`      |'
     }
     #EASY: ceiling of length of word * 2.5 = the max num of tries  
     #ratio of wrong answers / max num of tries = hangman_node progress
@@ -138,9 +135,11 @@ class Game_runner:
             curr_index = ""
             self.ratio = self.wrong_count / self.tries
             for k,v in Game_runner.hangman_nodes.items():
-                if self.ratio >= k:
-                    print(curr_color +v +text_fucker.end)
+                if self.ratio >= k: print(curr_color + v +text_fucker.end)
+                else: print(curr_color + "                                     |"+ text_fucker.end)
 
+            
+            [print(curr_color + "                                     |" + text_fucker.end) for i in range(3)]
             print()
 
             for i in range(len(self.word)):
@@ -200,10 +199,11 @@ class Game_runner:
                 for k,v in Game_runner.hangman_nodes.items():
                     if self.ratio >= k:
                         print(curr_color +v +text_fucker.end)
+                [print(curr_color + "                                     |" + text_fucker.end) for i in range(3)]
                 print()
                 print()
                 time.sleep(.2)
-                cprint(figlet_format("U    HAVE    LOST,    :((   !!!",  font='big',width=190), 'yellow', attrs=['bold'])
+                cprint(figlet_format("U    HAVE    LOST,    :((   !  !  ! ",  font='big',width=190), 'yellow', attrs=['bold'])
                 time.sleep(.2)
                 print()
                 print(text_fucker.bold + text_fucker.blue+ "The word you have failed to guess is" + text_fucker.end, end = '')
@@ -355,11 +355,11 @@ while True:
     time.sleep(2)
     print()
     print()
-    print(text_fucker.bright_mag + "now" +text_fucker.end, end = '')
+    print(text_fucker.bright_mag + "now " +text_fucker.end, end = '')
     time.sleep(1.5)
     diff = ""
     while True:
-        print(text_fucker.bright_mag + " we can do this the EASY way "+text_fucker.end+text_fucker.bold+"(enter 'e') "+text_fucker.end, end ='')
+        print(text_fucker.bright_mag + "we can do this the EASY way "+text_fucker.end+text_fucker.bold+"(enter 'e') "+text_fucker.end, end ='')
         time.sleep(1.5)
         diff = input(text_fucker.bright_mag+ "or the HARD way ( ͡° ͜ʖ ͡°) "+text_fucker.end+text_fucker.bold+"(enter 'h'): "+ text_fucker.end)
         if diff in ('e','E'):
@@ -383,7 +383,7 @@ while True:
 print()
 print()
 print()
-cprint(figlet_format(f'  G O O D   B Y E    !!!', font='isometric3',width=190),
+cprint(figlet_format(f'G O O D   B Y E    !!!', font='isometric3',width=190),
         'blue', attrs=['bold'])
     
 
