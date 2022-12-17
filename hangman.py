@@ -22,8 +22,9 @@ class text_fucker:
     yellow = "\x1b[33;20m"
     green = '\033[92m'
     blue = '\033[94m'
+    bright_mag = '\u001b[35;1m'
 
-    color_list = [red,cyan,green,blue]
+    color_list = [red,cyan,green,blue,bright_mag]
     #--------------------
     bold = '\033[1m'
     italics = '\033[3m'
@@ -105,14 +106,16 @@ class Game_runner:
     #EASY: ceiling of length of word * 2.5 = the max num of tries  
     #ratio of wrong answers / max num of tries = hangman_node progress
     #hangman_nodes_hard = {}
-    def __init__(self, players : list[Player], word :str):
+    def __init__(self, players : list[Player], word :str, diff :str):
         self.players = players
         self.word = word
         self.word_list = []
-        self.wrong_list = []
+        self.wrong_count = 0
         self.ratio = 0
-        self.tries = math.ceil(len(self.word) *2.5)
-    #
+        self.difficulty = diff
+        if self.difficulty == 'e': self.tries = math.ceil(len(self.word) *2.5)
+        else: self.tries = math.ceil(len(self.word) *1.5)
+    
 
 
     def runner(self):
@@ -133,11 +136,12 @@ class Game_runner:
             wrong = False
             print(curr_color + Game_runner.gallow + text_fucker.end)
             curr_index = ""
-            self.ratio = len(self.wrong_list) / self.tries
+            self.ratio = self.wrong_count / self.tries
             for k,v in Game_runner.hangman_nodes.items():
                 if self.ratio >= k:
                     print(curr_color +v +text_fucker.end)
 
+            print()
 
             for i in range(len(self.word)):
                 try: 
@@ -147,12 +151,12 @@ class Game_runner:
                 except ValueError:
                     print(curr_color +"_ " +text_fucker.end, end= '')
             print()
-            inp = input((curr_color+ "Enter an alpahebtical character: "+ text_fucker.end))
+            inp = input((curr_color+ "Enter an alphabetical character: "+ text_fucker.end))
             print()
             print()
-            if inp.isnumeric() or inp not in self.word:
-                self.wrong_list.append(inp)
-                self.ratio = len(self.wrong_list) / self.tries
+            if inp.isnumeric() or inp not in self.word or inp == "" or inp in self.word_list:
+                self.wrong_count += 1
+                self.ratio = self.wrong_count / self.tries
                 wrong = True
             else:
                 self.word_list.append(inp)
@@ -198,10 +202,22 @@ class Game_runner:
                         print(curr_color +v +text_fucker.end)
                 print()
                 print()
+                time.sleep(.2)
                 cprint(figlet_format("U    HAVE    LOST,    :((   !!!",  font='big',width=190), 'yellow', attrs=['bold'])
-                time.sleep(2)
+                time.sleep(.2)
                 print()
-                print(text_fucker.bold + text_fucker.blue + "(╥﹏╥) (╥﹏╥) (╥﹏╥) (╥﹏╥)" + text_fucker.end)
+                print(text_fucker.bold + text_fucker.blue+ "The word you have failed to guess is" + text_fucker.end, end = '')
+                time.sleep(.9)
+                print(text_fucker.bold + text_fucker.blue + "s" + text_fucker.end, end='')
+                time.sleep(.9)
+                print(text_fucker.bold + text_fucker.blue + "s" + text_fucker.end, end='')
+                time.sleep(.9)
+                print(text_fucker.bold + text_fucker.blue + "s:" + text_fucker.end)
+
+                cprint(figlet_format(f"{self.word}",  font='big',width=190), 'magenta', attrs=['bold'])
+                print()
+                print()
+                print(text_fucker.bold + text_fucker.blue + "(╥﹏╥)  (╥﹏╥)  (╥﹏╥)  (╥﹏╥)" + text_fucker.end)
                 print()
                 print()
                 break
@@ -332,14 +348,28 @@ while True:
     print()
     print(text_fucker.yellow + text_fucker.bold + "THE CHOSEN WORD ISSSSSSSS " + text_fucker.end, end= '' )
     for i in range(0,5):
-        time.sleep(.5)
+        time.sleep(.35)
         print(text_fucker.yellow + text_fucker.bold + "." + text_fucker.end,end= '')
     print()
     print(text_fucker.yellow + text_fucker.bold + "sike! that would defeat the purpose of the game !!!" + text_fucker.end) 
     time.sleep(2)
     print()
     print()
-    current_runner = Game_runner(temp, chosen_word)
+    print(text_fucker.bright_mag + "now" +text_fucker.end, end = '')
+    time.sleep(1.5)
+    diff = ""
+    while True:
+        print(text_fucker.bright_mag + " we can do this the EASY way "+text_fucker.end+text_fucker.bold+"(enter 'e') "+text_fucker.end, end ='')
+        time.sleep(1.5)
+        diff = input(text_fucker.bright_mag+ "or the HARD way ( ͡° ͜ʖ ͡°) "+text_fucker.end+text_fucker.bold+"(enter 'h'): "+ text_fucker.end)
+        if diff in ('e','E'):
+            diff = 'e'
+            break
+        elif diff in ('h','H'):
+            diff = 'h'
+            break
+        else: continue
+    current_runner = Game_runner(temp, chosen_word, diff)
     current_runner.runner()
     #-------------------------------------------------------------------------------------------------------------
     #if player decides to play again then :
@@ -353,7 +383,7 @@ while True:
 print()
 print()
 print()
-cprint(figlet_format(f'  G O O D     B Y E    !!!', font='isometric3',width=190),
+cprint(figlet_format(f'  G O O D   B Y E    !!!', font='isometric3',width=190),
         'blue', attrs=['bold'])
     
 
