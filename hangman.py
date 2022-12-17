@@ -281,7 +281,15 @@ class Game_runner:
 
 running = True
 cprint(figlet_format('  THE\nOFFICIAL\nHANG MAN\nCOMMAND\nLINE GAME', font='isometric3',width=120),
-        'green', attrs=['bold'])
+        'blue', attrs=['bold'])
+time.sleep(1)
+print(chr(27) + "[2J")
+cprint(figlet_format('  THE\nOFFICIAL\nHANG MAN\nCOMMAND\nLINE GAME', font='isometric1',width=120),
+'magenta', attrs=['bold'])
+time.sleep(1)
+print(chr(27) + "[2J")
+cprint(figlet_format('  THE\nOFFICIAL\nHANG MAN\nCOMMAND\nLINE GAME', font='isometric3',width=120),
+'green', attrs=['bold'])
 print()
 print()
 uu = ""
