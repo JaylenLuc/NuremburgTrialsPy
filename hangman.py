@@ -81,8 +81,14 @@ class Game_runner:
        "                                     |\n"+\
        "                                     |\n"+\
        "                                     |\n"+\
-       "                                     |\n"
-
+       "                                     |\n"+\
+        "                                     |\n"+\
+        "                                     |\n"+\
+        "                                     |\n"
+#in order ot fix the formatting issue, i think i shoudl format the hangman node strings  into the gallow strings
+#this prolly means that before even printing the gallow i would need to check the hang man nodes first and if
+#there are any to print, format it into the gallow string and then only aafter the checks are done do we print them
+#monolothically, if there are no nodes in a particular string inthe gallows then they should be empty spaces
     hangman_nodes= {
     .1:"         ( ͡° ͜ʖ ͡°)",
     .2:"            /|\\",
@@ -115,11 +121,14 @@ class Game_runner:
         pointer = 0
         #print("self.word = ", self.word)
         while True:
+            time.sleep(.5)
+            print(chr(27) + "[2J")
+            
             if pointer > len(self.players)-1:
                 pointer = 0
             print()
             curr_color = self.players[pointer].color
-
+            #print(curr_color + "*"*69 + text_fucker.end)
             print(curr_color + f"{self.players[pointer].get_name()}"+text_fucker.end+"'s TURN !!!" )
             wrong = False
             print(curr_color + Game_runner.gallow + text_fucker.end)
