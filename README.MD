@@ -1,5 +1,7 @@
 This is the official hangman game for the terminal!
 
+THere is an executable in the files. run that if u wanna play
+
 heres some pictures, have fun!
 
 
