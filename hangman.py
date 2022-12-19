@@ -390,6 +390,22 @@ while True:
             diff = 'h'
             break
         else: continue
+
+    time.sleep(.5)
+    cprint(figlet_format(f' GET\nREADY ! ! ! ', font='isometric3',width=190),
+        'blue', attrs=['bold'])
+    time.sleep(1)
+    print(chr(27) + "[2J")
+    cprint(figlet_format(f' GET\nREADY ! ! ! ', font='isometric1',width=190),
+        'magenta', attrs=['bold'])
+    time.sleep(1)
+    print(chr(27) + "[2J")
+    cprint(figlet_format(f' GET\nREADY ! ! ! ', font='isometric3',width=190),
+        'green', attrs=['bold'])
+    time.sleep(1)
+    print(chr(27) + "[2J")
+    cprint(figlet_format(f' GET\nREADY ! ! ! ', font='isometric1',width=190),
+        'cyan', attrs=['bold', 'blink'])
     current_runner = Game_runner(temp, chosen_word, diff)
     current_runner.runner()
     #-------------------------------------------------------------------------------------------------------------
