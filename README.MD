@@ -1,4 +1,4 @@
-This is he official hangman game for the terminal!
+This is the official hangman game for the terminal!
 
 heres some pictures, have fun!
 
