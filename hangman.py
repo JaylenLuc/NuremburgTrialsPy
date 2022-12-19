@@ -7,6 +7,7 @@ import requests
 import time
 import math
 import sys
+import getpass
 from colorama import init
 init(strip=not sys.stdout.isatty()) # strip colors if stdout is redirected
 from termcolor import cprint 
@@ -346,7 +347,8 @@ while True:
         " OR"+text_fucker.end+" Have a nonpartisan member choose a word for you "+text_fucker.bold + "enter 'n'"+ text_fucker.end + ": ")
         if word_opt in ('n','N'):
             while True:
-                chosen_word = input("Enter a word under "+text_fucker.red+"26"+text_fucker.end+" characters: ")
+                
+                chosen_word = getpass.getpass(prompt="Enter a word under "+text_fucker.red+"26"+text_fucker.end+" characters: ")
                 if len(chosen_word) >= 26 or not chosen_word.isalpha(): continue
                 else: break
             
